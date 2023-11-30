@@ -1,0 +1,14 @@
+html
+    head
+        title Weather Report
+    body
+        h1 Weather Report for #{apiData.location.name}, #{apiData.location.country}
+        div
+            h2 Current Conditions
+            p Last Updated: #{apiData.current.last_updated}
+            p Temperature: #{apiData.current.temp_c}°C (#{apiData.current.temp_f}°F)
+            p Condition: #{apiData.current.condition.text}
+            p Wind: #{apiData.current.wind_mph} mph, #{apiData.current.wind_dir}
+            p Pressure: #{apiData.current.pressure_mb} mb
+            p Humidity: #{apiData.current.humidity}%
+            p Cloud Cover: #{apiData.current.cloud}%

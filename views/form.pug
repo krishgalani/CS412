@@ -1,0 +1,13 @@
+html
+    head
+        title City Weather Form
+
+        script(src='../script.js', defer)
+
+    body
+        h1 City Weather Form
+
+        form(id='form', action='/ps4/result', method='post')
+            label(for='city') Enter City:
+            input(type='text', id='city', name='city', required)
+            button(type='submit') Get Weather
