@@ -1,9 +1,27 @@
+//routes/ps4.js
 const express = require('express');
 const request = require('request');
 const { getApiUrl } = require('../config');
 const router = express.Router();
 
-// Function to fetch data using request module
+
+const fetchData = (apiUrl, option) => {
+    try {
+        switch (option) {
+            case 'promise':
+                return fetchDataWithRequest(apiUrl);
+            case 'async':
+                return fetchDataWithAsyncAwait(apiUrl);
+            case 'callback':
+                return fetchDataWithFetch(apiUrl);
+            default:
+                throw new Error('Invalid fetch method specified.');
+        }
+    } catch (error) {
+        console.error('Error fetching API data:', error.message);
+        throw error;
+    }
+};
 const fetchDataWithRequest = (apiUrl) => {
     return new Promise((resolve, reject) => {
         request(apiUrl, { json: true }, (error, response, body) => {
@@ -52,40 +70,16 @@ router.get('/', async (req, res) => {
 
 // POST routes using different methods for fetching data
 
-router.post('/result', async (req, res) => {
+router.post('/', async (req, res) => {
+    const apiUrl = getApiUrl(req.body.city);
+    const option = req.body.option;
     try {
-        const apiData = await fetchDataWithAsyncAwait(getApiUrl(req.body.city));
+        const apiData = await fetchData(apiUrl, option);
         res.render('result', { apiData });
     } catch (error) {
-        res.status(500).json({ error: 'Error fetching data from the external API.' });
+        res.send("Not a city!")
     }
 });
 
-router.post('/promise', async (req, res) => {
-    try {
-        const apiData = await fetchDataWithRequest(getApiUrl(req.body.city));
-        res.json(apiData);
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching data from the external API.' });
-    }
-});
-
-router.post('/async', async (req, res) => {
-    try {
-        const apiData = await fetchDataWithAsyncAwait(getApiUrl(req.body.city));
-        res.json(apiData);
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching data from the external API.' });
-    }
-});
-
-router.post('/callback', async (req, res) => {
-    try {
-        const apiData = await fetchDataWithFetch(getApiUrl(req.body.city));
-        res.json(apiData);
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching data from the external API.' });
-    }
-});
 
 module.exports = router;

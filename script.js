@@ -1,4 +1,4 @@
-// public/script.js
+//script.js
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form');
 
@@ -13,20 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-            const response = await fetch('/promise', {
+            const response = await fetch(form.getAttribute('action'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(jsonData),
             });
-
-            if (response.ok) {
-                // Handle success (if needed)
-                const apiData = await response.json();
-                console.log(apiData);
-            } else {
-                // Handle errors (if needed)
+            if (!response.ok){
                 console.error('Error:', response.status);
             }
         } catch (error) {
