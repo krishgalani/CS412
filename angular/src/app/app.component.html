@@ -1,0 +1,22 @@
+<!-- app.component.html -->
+<div>
+  <h2>Weather Information</h2>
+
+  <button (click)="fetchData()">Fetch Data</button>
+
+  <ng-container *ngIf="jsonData">
+    <p><strong>Location:</strong> {{ jsonData.location.name }}, {{ jsonData.location.region }}, {{ jsonData.location.country }}</p>
+    <p><strong>Local Time:</strong> {{ jsonData.location.localtime }}</p>
+    <p><strong>Temperature:</strong> {{ jsonData.current.temp_c }}°C / {{ jsonData.current.temp_f }}°F</p>
+    <p><strong>Condition:</strong> {{ jsonData.current.condition.text }}</p>
+    <p><strong>Wind:</strong> {{ jsonData.current.wind_mph }} mph / {{ jsonData.current.wind_kph }} kph, {{ jsonData.current.wind_dir }}</p>
+    <p><strong>Pressure:</strong> {{ jsonData.current.pressure_mb }} mb / {{ jsonData.current.pressure_in }} in</p>
+    <p><strong>Precipitation:</strong> {{ jsonData.current.precip_mm }} mm / {{ jsonData.current.precip_in }} in</p>
+    <p><strong>Humidity:</strong> {{ jsonData.current.humidity }}%</p>
+    <p><strong>Cloud:</strong> {{ jsonData.current.cloud }}%</p>
+    <p><strong>Feels Like:</strong> {{ jsonData.current.feelslike_c }}°C / {{ jsonData.current.feelslike_f }}°F</p>
+    <p><strong>Visibility:</strong> {{ jsonData.current.vis_km }} km / {{ jsonData.current.vis_miles }} miles</p>
+    <p><strong>UV Index:</strong> {{ jsonData.current.uv }}</p>
+    <p><strong>Gust:</strong> {{ jsonData.current.gust_mph }} mph / {{ jsonData.current.gust_kph }} kph</p>
+  </ng-container>
+</div>

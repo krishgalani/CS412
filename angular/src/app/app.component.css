@@ -1,0 +1,22 @@
+/*app.component.css*/
+div {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #333;
+}
+
+p {
+  margin: 10px 0;
+}
+
+strong {
+  color: #007BFF;
+}
