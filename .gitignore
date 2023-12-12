@@ -5,3 +5,5 @@ package-lock.json
 package.json
 dump.rdb
 .DS_Store
+/angular/*
+!/angular/src/
