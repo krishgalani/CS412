@@ -11,21 +11,26 @@ const fetchData = (apiUrl) => {
             throw error;
         });
 };
-
+const fetchData2 = async (apiUrl,res) => {
+    let response = await fetch.default(apiUrl);
+    if(response.ok){
+        let apiData = await response.json();
+        res.render('result', {apiData});
+        return apiData;
+    } else{
+        throw new Error(`${response.statusCode} - ${response.statusMessage}`);
+    }
+};
 // GET route to render the data using a Pug template
 router.get('/', (req, res) => {
     res.render('form');
 });
 
 // POST routes using different methods for fetching data
-router.post ('/',  async (req, res) => {
-    const apiUrl = getApiUrl(req.body.city);
-    try {
-        const apiData = await fetchData(apiUrl);
-        res.render('result', { apiData });
-    } catch (error) {
-        res.send("Not a city!")
-    }
+router.post('/',  (req, res) => {
+    const key = req.body.city;
+    const apiUrl = getApiUrl(key);
+    fetchData2(apiUrl,res);
 });
 
 module.exports = router;
