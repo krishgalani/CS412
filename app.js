@@ -6,10 +6,11 @@ const app = express();
 const router = require('./routes/ps4.js');
 const {join} = require("path");
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'pug');
-// Use the router in your app
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/ps4', router);

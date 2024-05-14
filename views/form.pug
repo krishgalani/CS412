@@ -2,19 +2,10 @@
 html
     head
         title City Weather Form
-        script(src='../script.js', defer)
-
+        //- script(src='../script.js', defer)
     body
         h1 City Weather Form
-
         form(id='form', action='/ps4/', method='post')
             label(for='city') Enter City:
             input(type='text', id='city', name='city', required)
             button(type='submit') Get Weather
-
-            // Option bar
-            label(for='option') Select Method:
-            select(name='option' id='option')
-                option(value='promise', selected) Promise
-                option(value='async') Async
-                option(value='callback') Callback
