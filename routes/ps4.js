@@ -3,15 +3,7 @@ const fetch = require('node-fetch')
 const { getApiUrl } = require('../config.js');
 const router = express.Router();
 
-const fetchData = (apiUrl) => {
-    return fetch(apiUrl)
-        .then(response => response.ok ? response.json() : Promise.reject(`HTTP error! Status: ${response.status}`))
-        .catch(error => {
-            console.error('Error:', error);
-            throw error;
-        });
-};
-const fetchData2 = async (apiUrl,res) => {
+const fetchData = async (apiUrl,res) => {
     let response = await fetch.default(apiUrl);
     if(response.ok){
         let apiData = await response.json();
@@ -30,7 +22,7 @@ router.get('/', (req, res) => {
 router.post('/',  (req, res) => {
     const key = req.body.city;
     const apiUrl = getApiUrl(key);
-    fetchData2(apiUrl,res);
+    fetchData(apiUrl,res);
 });
 
 module.exports = router;
